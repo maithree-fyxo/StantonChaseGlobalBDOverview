@@ -55,7 +55,7 @@ const STYLES = `
 * { box-sizing: border-box; }
 .gbd { font-family: 'Inter', system-ui, sans-serif; color: var(--text); background: var(--bg); -webkit-font-smoothing: antialiased; }
 .gbd-display { font-family: 'Instrument Sans', 'Inter', sans-serif; font-weight: 600; }
-.gbd button { font-family: inherit; cursor: pointer; }
+.gbd button { font-family: inherit; color: inherit; cursor: pointer; }
 .gbd :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
 
 /* shell */
