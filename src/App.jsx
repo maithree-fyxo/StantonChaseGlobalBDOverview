@@ -131,6 +131,9 @@ const STYLES = `
 .empty-state { border: 1px dashed var(--border-strong); border-radius: 14px; padding: 44px 28px; text-align: center; background: var(--surface); }
 .empty-state .es-title { font-family: 'Instrument Sans'; font-weight: 600; font-size: 18px; }
 .empty-state .es-sub { color: var(--text-muted); font-size: 14px; margin: 8px auto 22px; max-width: 400px; line-height: 1.5; }
+.coming-soon { margin-top: 4px; }
+.coming-soon .cs-icon { width: 52px; height: 52px; border-radius: 14px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin: 0 auto 16px; }
+.coming-soon .es-sub { margin-bottom: 0; }
 .flagship-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-faint); font-weight: 600; margin-bottom: 12px; }
 .flagship { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; }
 .flag-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; padding: 8px 13px; font-weight: 600; font-size: 13.5px; color: var(--text); }
@@ -801,7 +804,7 @@ export default function App() {
             {page === "companies" && <CompaniesPage selected={selected} openCompany={openCompany} clear={() => setSelectedId(null)} />}
             {page === "consultants" && <ConsultantsPage openCompany={openCompany} selected={selectedConsultant} setSelected={setSelectedConsultant} />}
             {page === "practice" && <PracticePage openCompany={openCompany} cats={practiceCats} setCats={setPracticeCats} subs={practiceSubs} setSubs={setPracticeSubs} />}
-            {page === "signals" && <AggregateSignalsPage openCompany={openCompany} />}
+            {page === "signals" && <ComingSoon feature="Signals" page />}
             {page === "stale" && <StalePage openCompany={openCompany} />}
             {page === "marketing" && <MarketingStub />}
           </div>
@@ -996,8 +999,8 @@ function CompanyView({ company: c }) {
         {tab === "opportunities" && <Table head={["Opportunity", "Function", "Stage", "Est. fee", "Target date", "Entity"]} empty={emptyMsg("opportunities", scopeEntity)}
           rows={f.opportunities.map((x, i) => <tr key={i}><td><RecordLink href={ezUrl("project", x.title)}>{x.title}</RecordLink></td><td className="cell-muted">{x.fn}</td><td>{oppPill(x.status)}</td><td className="cell-num">{fmt(x.value)}</td><td className="cell-muted">{x.date}</td><td><span className="entity-tag">{x.entity}</span></td></tr>)} />}
         {tab === "revenues" && <RevenuesTab c={c} scope={scope} scopeEntity={scopeEntity} />}
-        {tab === "news" && <NewsSection c={c} scope={scope} />}
-        {tab === "signals" && <SignalsSection c={c} signals={f.signals} scope={scope} />}
+        {tab === "news" && <ComingSoon feature="News" />}
+        {tab === "signals" && <ComingSoon feature="Signals" />}
         {tab === "activity" && <Table head={["Date", "Type", "Note", "Consultant", "Entity"]} empty={emptyMsg("activity", scopeEntity)}
           rows={f.activity.map((x, i) => <tr key={i}><td className="cell-muted" style={{ whiteSpace: "nowrap" }}>{x.date}</td><td><span className="pill closed">{x.type}</span></td><td>{x.note}</td><td className="cell-muted">{x.who}</td><td><span className="entity-tag">{x.entity}</span></td></tr>)} />}
         {tab === "placements" && <Table head={["Candidate placed", "Role", "Entity", "Date"]} empty={emptyMsg("placements", scopeEntity)}
@@ -1057,6 +1060,25 @@ function RevenuesTab({ c, scope, scopeEntity }) {
         </div>
       </div>
     </div>
+  );
+}
+
+function ComingSoon({ feature, page }) {
+  const card = (
+    <div className="empty-state coming-soon">
+      <div className="cs-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7.5V12l3 2" /></svg>
+      </div>
+      <div className="es-title">Coming soon</div>
+      <div className="es-sub">{feature} is planned for Phase 2 and isn't available in this preview yet.</div>
+    </div>
+  );
+  if (!page) return card;
+  return (
+    <>
+      <div className="page-head"><h1>{feature}</h1></div>
+      {card}
+    </>
   );
 }
 
