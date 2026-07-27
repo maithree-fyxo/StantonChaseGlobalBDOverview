@@ -230,6 +230,11 @@ const STYLES = `
 /* company view */
 .selected-note { font-size: 12.5px; color: var(--text-muted); margin: -8px 0 20px; }
 .selected-note button { border: 0; background: transparent; color: var(--accent); font-weight: 600; font-size: 12.5px; padding: 0; }
+.record-bar { display: flex; align-items: center; gap: 12px; margin: -8px 0 20px; }
+.back-btn { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: 1px solid var(--border-strong); border-radius: 8px; padding: 6px 12px 6px 10px; font-size: 13px; font-weight: 600; color: var(--text-muted); transition: color .12s, border-color .12s, background .12s; }
+.back-btn:hover { color: var(--text); border-color: var(--text-faint); background: var(--surface-2); }
+.resolved-tag { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--text-muted); border: 1px solid var(--border); border-radius: 999px; padding: 4px 11px; font-weight: 500; }
+.resolved-tag svg { color: var(--text-faint); }
 .co-head { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
 .co-ident { display: flex; align-items: center; gap: 16px; }
 .co-title h2 { font-family: 'Instrument Sans'; font-weight: 600; font-size: clamp(26px,4vw,36px); letter-spacing: -.02em; margin: 0; line-height: 1; }
@@ -805,8 +810,8 @@ export default function App() {
             {page === "consultants" && <ConsultantsPage openCompany={openCompany} selected={selectedConsultant} setSelected={setSelectedConsultant} />}
             {page === "practice" && <PracticePage openCompany={openCompany} cats={practiceCats} setCats={setPracticeCats} subs={practiceSubs} setSubs={setPracticeSubs} />}
             {page === "signals" && <ComingSoon feature="Signals" page />}
-            {page === "stale" && <StalePage openCompany={openCompany} />}
-            {page === "marketing" && <MarketingStub />}
+            {page === "stale" && <ComingSoon feature="Stale accounts" page />}
+            {page === "marketing" && <ComingSoon feature="Marketing" page />}
           </div>
         </div>
       </div>
@@ -873,7 +878,16 @@ function CompaniesPage({ selected, openCompany, clear }) {
 
       {selected ? (
         <>
-          <div className="selected-note">Resolved family view. <button onClick={clear}>Clear</button></div>
+          <div className="record-bar">
+            <button className="back-btn" onClick={clear}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>
+              Companies
+            </button>
+            <span className="resolved-tag">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><circle cx="7" cy="17" r="3" /><circle cx="17" cy="7" r="3" /><path d="M9.5 14.5l5-5" /></svg>
+              Resolved family view
+            </span>
+          </div>
           <CompanyView company={selected} />
         </>
       ) : (
