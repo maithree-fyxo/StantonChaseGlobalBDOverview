@@ -1250,7 +1250,16 @@ function ConsultantsPage({ openCompany, selected, setSelected }) {
 
       {consultant ? (
         <>
-          <div className="selected-note">Global engagement view. <button onClick={() => setSelected(null)}>Clear</button></div>
+          <div className="record-bar">
+            <button className="back-btn" onClick={() => setSelected(null)}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M11 18l-6-6 6-6" /></svg>
+              Consultants
+            </button>
+            <span className="resolved-tag">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18" /></svg>
+              Global engagement view
+            </span>
+          </div>
           <ConsultantView consultant={consultant} openCompany={openCompany} />
         </>
       ) : (
