@@ -264,6 +264,7 @@ const STYLES = `
 .tab.on { color: var(--accent); background: var(--accent-soft); border-color: var(--accent); font-weight: 600; }
 .tab .tcount { font-size: 11px; color: var(--text-faint); margin-left: 6px; font-weight: 500; }
 .tab.on .tcount { color: var(--accent); }
+.tab .v2-tag { margin-left: 6px; vertical-align: middle; }
 .panel { padding-top: 26px; animation: fade .25s ease; }
 @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
@@ -922,8 +923,8 @@ function CompanyView({ company: c }) {
     ["opportunities", "Opportunities", f.opportunities.length],
     ["revenues", "Revenues", null],
     ["activity", "Activity", f.activity.length],
-    ["news", "News", c.news.length],
-    ["signals", "Signals", f.signals.length],
+    ["news", "News", c.news.length, true],
+    ["signals", "Signals", f.signals.length, true],
     ["placements", "Placements", f.placements.length],
     ["offlimits", "Off-limits", f.offLimitsList.length],
     ["marketing", "Marketing", f.marketing.length],
@@ -977,9 +978,9 @@ function CompanyView({ company: c }) {
       </div>
 
       <nav className="tabs" role="tablist">
-        {TABS.map(([id, label, count]) => (
+        {TABS.map(([id, label, count, v2]) => (
           <button key={id} role="tab" aria-selected={tab === id} className={`tab ${tab === id ? "on" : ""}`} onClick={() => setTab(id)}>
-            {label}{count > 0 ? <span className="tcount">{count}</span> : null}
+            {label}{count > 0 ? <span className="tcount">{count}</span> : null}{v2 ? <span className="v2-tag">v2</span> : null}
           </button>
         ))}
       </nav>
