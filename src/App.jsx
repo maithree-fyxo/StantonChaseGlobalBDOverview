@@ -235,6 +235,7 @@ const STYLES = `
 .back-btn:hover { color: var(--text); border-color: var(--text-faint); background: var(--surface-2); }
 .resolved-tag { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--text-muted); border: 1px solid var(--border); border-radius: 999px; padding: 4px 11px; font-weight: 500; }
 .resolved-tag svg { color: var(--text-faint); }
+.owner-office { font-size: 11px; color: var(--text-faint); margin-top: 1px; }
 .co-head { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
 .co-ident { display: flex; align-items: center; gap: 16px; }
 .co-title h2 { font-family: 'Instrument Sans'; font-weight: 600; font-size: clamp(26px,4vw,36px); letter-spacing: -.02em; margin: 0; line-height: 1; }
@@ -418,13 +419,13 @@ const COMPANIES = [
       { name: "Aiko Tanaka", office: "Tokyo", entity: "Japan", last: "2 weeks ago" },
       { name: "Markus Hoffmann", office: "Frankfurt", entity: "Germany", last: "5 days ago" } ],
     projects: [
-      { dataType: "assignment", title: "VP Data Center Sales", fn: "Sales", status: "Active", loc: "Santa Clara", date: "Jun 2026", entity: "US" },
-      { dataType: "assignment", title: "Head of Automotive EMEA", fn: "General Mgmt", status: "In progress", loc: "Frankfurt", date: "May 2026", entity: "Germany" },
-      { dataType: "assignment", title: "Director of AI Research", fn: "R&D", status: "Closed", loc: "Bangalore", date: "Feb 2026", entity: "India" },
-      { dataType: "opportunity", title: "AI Infrastructure – Chief Architect", fn: "R&D", status: "Negotiation", value: 320000, date: "Aug 2026", entity: "US" },
-      { dataType: "opportunity", title: "EMEA Automotive GM search", fn: "General Mgmt", status: "Proposal sent", value: 180000, date: "Jul 2026", entity: "Germany" },
-      { dataType: "opportunity", title: "India R&D leadership scale-up", fn: "R&D", status: "Prospecting", value: 150000, date: "Sep 2026", entity: "India" },
-      { dataType: "opportunity", title: "APJ Enterprise Sales VP", fn: "Sales", status: "Won", value: 210000, date: "Jun 2026", entity: "Japan" } ],
+      { dataType: "assignment", owner: "David Kessler", title: "VP Data Center Sales", fn: "Sales", status: "Active", loc: "Santa Clara", date: "Jun 2026", entity: "US" },
+      { dataType: "assignment", owner: "Markus Hoffmann", title: "Head of Automotive EMEA", fn: "General Mgmt", status: "In progress", loc: "Frankfurt", date: "May 2026", entity: "Germany" },
+      { dataType: "assignment", owner: "Aiko Tanaka", title: "Director of AI Research", fn: "R&D", status: "Closed", loc: "Bangalore", date: "Feb 2026", entity: "India" },
+      { dataType: "opportunity", owner: "David Kessler", title: "AI Infrastructure – Chief Architect", fn: "R&D", status: "Negotiation", value: 320000, date: "Aug 2026", entity: "US" },
+      { dataType: "opportunity", owner: "Markus Hoffmann", title: "EMEA Automotive GM search", fn: "General Mgmt", status: "Proposal sent", value: 180000, date: "Jul 2026", entity: "Germany" },
+      { dataType: "opportunity", owner: "Aiko Tanaka", title: "India R&D leadership scale-up", fn: "R&D", status: "Prospecting", value: 150000, date: "Sep 2026", entity: "India" },
+      { dataType: "opportunity", owner: "Aiko Tanaka", title: "APJ Enterprise Sales VP", fn: "Sales", status: "Won", value: 210000, date: "Jun 2026", entity: "Japan" } ],
     activity: [
       { date: "07 Jul 2026", type: "Meeting", note: "Quarterly account review with Priya Raman", who: "David Kessler", entity: "US" },
       { date: "01 Jul 2026", type: "Call", note: "Intro call re: automotive search brief", who: "Markus Hoffmann", entity: "Germany" },
@@ -449,10 +450,10 @@ const COMPANIES = [
       { name: "Aiko Tanaka", office: "Tokyo", entity: "Japan", last: "1 month ago" },
       { name: "James Whitfield", office: "Baltimore", entity: "US", last: "3 weeks ago" } ],
     projects: [
-      { dataType: "assignment", title: "Head of Semiconductor BU", fn: "General Mgmt", status: "Active", loc: "Tokyo", date: "Jun 2026", entity: "Japan" },
-      { dataType: "assignment", title: "VP Federal Sales", fn: "Sales", status: "In progress", loc: "Irving", date: "Apr 2026", entity: "US" },
-      { dataType: "opportunity", title: "Semiconductor BU – Head of Ops", fn: "General Mgmt", status: "Negotiation", value: 240000, date: "Jul 2026", entity: "Japan" },
-      { dataType: "opportunity", title: "US Federal practice build-out", fn: "Sales", status: "Proposal sent", value: 160000, date: "Aug 2026", entity: "US" } ],
+      { dataType: "assignment", owner: "Aiko Tanaka", title: "Head of Semiconductor BU", fn: "General Mgmt", status: "Active", loc: "Tokyo", date: "Jun 2026", entity: "Japan" },
+      { dataType: "assignment", owner: "James Whitfield", title: "VP Federal Sales", fn: "Sales", status: "In progress", loc: "Irving", date: "Apr 2026", entity: "US" },
+      { dataType: "opportunity", owner: "Aiko Tanaka", title: "Semiconductor BU – Head of Ops", fn: "General Mgmt", status: "Negotiation", value: 240000, date: "Jul 2026", entity: "Japan" },
+      { dataType: "opportunity", owner: "James Whitfield", title: "US Federal practice build-out", fn: "Sales", status: "Proposal sent", value: 160000, date: "Aug 2026", entity: "US" } ],
     activity: [
       { date: "28 Jun 2026", type: "Meeting", note: "Briefing on semiconductor BU leadership search", who: "Aiko Tanaka", entity: "Japan" },
       { date: "15 Jun 2026", type: "Note", note: "Ownership: Japan record — Tokyo MD; US record — Baltimore", who: "James Whitfield", entity: "US" } ],
@@ -473,9 +474,9 @@ const COMPANIES = [
       { name: "David Kessler", office: "Baltimore", entity: "US West", last: "7 months ago" },
       { name: "Ciara Byrne", office: "Dublin", entity: "Ireland", last: "8 months ago" } ],
     projects: [
-      { dataType: "assignment", title: "VP Foundry Business Development", fn: "Sales", status: "Closed", loc: "Santa Clara", date: "Dec 2025", entity: "US West" },
-      { dataType: "opportunity", title: "Foundry BD revival", fn: "Sales", status: "Prospecting", value: 140000, date: "Sep 2026", entity: "US West" },
-      { dataType: "opportunity", title: "Ireland site leadership", fn: "Operations", status: "Lost", value: 90000, date: "Mar 2026", entity: "Ireland" } ],
+      { dataType: "assignment", owner: "David Kessler", title: "VP Foundry Business Development", fn: "Sales", status: "Closed", loc: "Santa Clara", date: "Dec 2025", entity: "US West" },
+      { dataType: "opportunity", owner: "David Kessler", title: "Foundry BD revival", fn: "Sales", status: "Prospecting", value: 140000, date: "Sep 2026", entity: "US West" },
+      { dataType: "opportunity", owner: "Ciara Byrne", title: "Ireland site leadership", fn: "Operations", status: "Lost", value: 90000, date: "Mar 2026", entity: "Ireland" } ],
     activity: [ { date: "02 Dec 2025", type: "Call", note: "Closed foundry BD leadership search", who: "David Kessler", entity: "US West" } ],
     placements: [],
     offLimitsList: [],
@@ -488,8 +489,8 @@ const COMPANIES = [
     contacts: [ { name: "Anouk de Vries", title: "Chief Innovation Officer", loc: "Amsterdam", div: "Innovation", entity: "NL" } ],
     consultants: [ { name: "Sanne Bakker", office: "Amsterdam", entity: "NL", last: "1 week ago" } ],
     projects: [
-      { dataType: "assignment", title: "Head of Digital Health", fn: "General Mgmt", status: "In progress", loc: "Amsterdam", date: "May 2026", entity: "NL" },
-      { dataType: "opportunity", title: "Digital Health leadership retainer", fn: "General Mgmt", status: "Negotiation", value: 200000, date: "Jul 2026", entity: "NL" } ],
+      { dataType: "assignment", owner: "Sanne Bakker", title: "Head of Digital Health", fn: "General Mgmt", status: "In progress", loc: "Amsterdam", date: "May 2026", entity: "NL" },
+      { dataType: "opportunity", owner: "Sanne Bakker", title: "Digital Health leadership retainer", fn: "General Mgmt", status: "Negotiation", value: 200000, date: "Jul 2026", entity: "NL" } ],
     activity: [ { date: "02 Jul 2026", type: "Meeting", note: "Digital health leadership discussion", who: "Sanne Bakker", entity: "NL" } ],
     placements: [],
     offLimitsList: [],
@@ -502,9 +503,9 @@ const COMPANIES = [
     contacts: [ { name: "Wei-Chen Lin", title: "SVP Advanced Technology", loc: "Hsinchu", div: "Technology", entity: "TW" } ],
     consultants: [ { name: "Grace Chen", office: "Taipei", entity: "TW", last: "4 days ago" } ],
     projects: [
-      { dataType: "assignment", title: "Fab Operations Director", fn: "Operations", status: "Active", loc: "Phoenix", date: "Jun 2026", entity: "AZ" },
-      { dataType: "opportunity", title: "Arizona fab expansion – Ops VP", fn: "Operations", status: "Won", value: 260000, date: "Jun 2026", entity: "AZ" },
-      { dataType: "opportunity", title: "Taiwan advanced tech – R&D Director", fn: "R&D", status: "Proposal sent", value: 190000, date: "Aug 2026", entity: "TW" } ],
+      { dataType: "assignment", owner: "Grace Chen", title: "Fab Operations Director", fn: "Operations", status: "Active", loc: "Phoenix", date: "Jun 2026", entity: "AZ" },
+      { dataType: "opportunity", owner: "Grace Chen", title: "Arizona fab expansion – Ops VP", fn: "Operations", status: "Won", value: 260000, date: "Jun 2026", entity: "AZ" },
+      { dataType: "opportunity", owner: "Grace Chen", title: "Taiwan advanced tech – R&D Director", fn: "R&D", status: "Proposal sent", value: 190000, date: "Aug 2026", entity: "TW" } ],
     activity: [ { date: "06 Jul 2026", type: "Call", note: "Arizona fab operations leadership brief", who: "Grace Chen", entity: "AZ" } ],
     placements: [],
     offLimitsList: [],
@@ -908,6 +909,8 @@ function CompaniesPage({ selected, openCompany, clear }) {
 }
 
 /* --------------------------- company view -------------------------- */
+const ownerOffice = (c, name) => { const con = c.consultants.find((x) => x.name === name); return con ? con.office : "—"; };
+
 function CompanyView({ company: c }) {
   const [tab, setTab] = useState("overview");
   const [scope, setScope] = useState(null);
@@ -1008,10 +1011,10 @@ function CompanyView({ company: c }) {
           rows={f.contacts.map((x, i) => <tr key={i}><td><RecordLink href={ezUrl("person", x.name)}>{x.name}</RecordLink></td><td>{x.title}</td><td className="cell-muted">{x.loc}</td><td className="cell-muted">{x.div}</td><td><span className="entity-tag">{x.entity}</span></td></tr>)} />}
         {tab === "consultants" && <Table head={["Consultant", "SC Office", "Assigned entity", "Last activity"]} empty={emptyMsg("consultants", scopeEntity)}
           rows={f.consultants.map((x, i) => <tr key={i}><td className="cell-strong">{x.name}</td><td className="cell-muted">{x.office}</td><td>{entName(x.entity)}</td><td className="cell-muted">{x.last}</td></tr>)} />}
-        {tab === "assignments" && <Table head={["Assignment", "Function", "Status", "Location", "Date", "Entity"]} empty={emptyMsg("assignments", scopeEntity)}
-          rows={f.assignments.map((x, i) => <tr key={i}><td><RecordLink href={ezUrl("project", x.title)}>{x.title}</RecordLink></td><td className="cell-muted">{x.fn}</td><td>{statusPill(x.status)}</td><td className="cell-muted">{x.loc}</td><td className="cell-muted">{x.date}</td><td><span className="entity-tag">{x.entity}</span></td></tr>)} />}
-        {tab === "opportunities" && <Table head={["Opportunity", "Function", "Stage", "Est. fee", "Target date", "Entity"]} empty={emptyMsg("opportunities", scopeEntity)}
-          rows={f.opportunities.map((x, i) => <tr key={i}><td><RecordLink href={ezUrl("project", x.title)}>{x.title}</RecordLink></td><td className="cell-muted">{x.fn}</td><td>{oppPill(x.status)}</td><td className="cell-num">{fmt(x.value)}</td><td className="cell-muted">{x.date}</td><td><span className="entity-tag">{x.entity}</span></td></tr>)} />}
+        {tab === "assignments" && <Table head={["Assignment", "Function", "Status", "Location", "Assignment owner", "Date", "Entity"]} empty={emptyMsg("assignments", scopeEntity)}
+          rows={f.assignments.map((x, i) => <tr key={i}><td><RecordLink href={ezUrl("project", x.title)}>{x.title}</RecordLink></td><td className="cell-muted">{x.fn}</td><td>{statusPill(x.status)}</td><td className="cell-muted">{x.loc}</td><td><div className="cell-strong">{x.owner}</div><div className="owner-office">{ownerOffice(c, x.owner)}</div></td><td className="cell-muted">{x.date}</td><td><span className="entity-tag">{x.entity}</span></td></tr>)} />}
+        {tab === "opportunities" && <Table head={["Opportunity", "Function", "Stage", "Est. fee", "Opportunity owner", "Target date", "Entity"]} empty={emptyMsg("opportunities", scopeEntity)}
+          rows={f.opportunities.map((x, i) => <tr key={i}><td><RecordLink href={ezUrl("project", x.title)}>{x.title}</RecordLink></td><td className="cell-muted">{x.fn}</td><td>{oppPill(x.status)}</td><td className="cell-num">{fmt(x.value)}</td><td><div className="cell-strong">{x.owner}</div><div className="owner-office">{ownerOffice(c, x.owner)}</div></td><td className="cell-muted">{x.date}</td><td><span className="entity-tag">{x.entity}</span></td></tr>)} />}
         {tab === "revenues" && <RevenuesTab c={c} scope={scope} scopeEntity={scopeEntity} />}
         {tab === "news" && <ComingSoon feature="News" />}
         {tab === "signals" && <ComingSoon feature="Signals" />}
